@@ -27,54 +27,6 @@ share/python-wheels/
 MANIFEST
 
 
-# R
-.Rhistory
-.RData
-.Ruserdata
-.Rproj.user/
-*.Rproj
-*.tar.gz
-.Rcheck/
-.Rapp.history
-.RDataTmp
-.rs.user/
-.Rproj
-.Rproj.user
-.Rhistory
-.Rapp.history
-.RData
-.Ruserdata
-*.RData
-*.Rhistory
-*.Rds
-*.Rdata
-*.rda
-*.Rproj
-*.Rproj.user
-*.Rcheck
-*.tar.gz
-*.Rnw
-*.Rout
-*.Rd
-*.Rmd
-*.pdf
-*.synctex.gz
-*.tex
-*.log
-*.aux
-*.out
-*.toc
-*.bbl
-*.blg
-*.brf
-*.lof
-*.lot
-*.fls
-*.fdb_latexmk
-*.synctex(busy)
-*.synctex.gz(busy)
-
-
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
