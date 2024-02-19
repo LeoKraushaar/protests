@@ -1,0 +1,66 @@
+﻿"Cube Title","Product Id","CANSIM Id",URL,"Cube Notes","Archive Status",Frequency,"Start Reference Period","End Reference Period","Total number of dimensions"
+"Monthly survey of food services and drinking places","21100019","355-0006","https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2110001901",1;2,"CURRENT - a cube available to the public and that is current","Monthly","1998-01-01","2023-11-01","4",
+
+"Dimension ID","Dimension name","Dimension Notes","Dimension Definitions"
+"1","Geography",,""
+"2","North American Industry Classification System (NAICS)",,""
+"3","Service detail",,""
+"4","Seasonal adjustment",,""
+
+"Dimension ID","Member Name","Classification Code","Member ID","Parent Member ID",Terminated,"Member Notes","Member Definitions"
+"1","Canada","[11124]","1","","",3,
+"1","Newfoundland and Labrador","[10]","2","1","",,
+"1","Prince Edward Island","[11]","3","1","",,
+"1","Nova Scotia","[12]","4","1","",,
+"1","New Brunswick","[13]","5","1","",,
+"1","Quebec","[24]","6","1","",,
+"1","Ontario","[35]","7","1","",,
+"1","Manitoba","[46]","8","1","",,
+"1","Saskatchewan","[47]","9","1","",,
+"1","Alberta","[48]","10","1","",,
+"1","British Columbia","[59]","11","1","",,
+"1","Yukon","[60]","12","1","",3,
+"1","Northwest Territories","[61]","13","1","",3,
+"1","Nunavut","[62]","14","1","",3,
+"2","Total, food services and drinking places","","1","","",,
+"2","Special food services","[7223]","4","1","",,
+"2","Drinking places (alcoholic beverages)","[7224]","5","1","",,
+"2","Full-service restaurants","[722511]","2","1","",6,
+"2","Limited-service eating places","[722512]","3","1","",7,
+"3","Receipts","","1","","",,
+"3","Locations","","2","","t",,
+"4","Unadjusted","","1","","",,
+"4","Seasonally adjusted","","2","","",4,
+
+Symbol Legend
+Description,Symbol
+"not available for a specific reference period","..",
+"less than the limit of detection","<LOD",
+"value rounded to 0 (zero) where there is a meaningful distinction between true zero and the value that was rounded","0s",
+"data quality: excellent","A",
+"data quality: very good","B",
+"data quality: good","C",
+"data quality: acceptable","D",
+"use with caution","E",
+"too unreliable to be published","F",
+"not applicable","...",
+"preliminary","p",
+"revised","r",
+"suppressed to meet the confidentiality requirements of the Statistics Act","x",
+"terminated","t",
+
+"Survey Code","Survey Name"
+"2419","Monthly Survey of Food Services and Drinking Places"
+
+"Subject Code","Subject Name"
+"21","Business and consumer services and culture"
+
+"Note ID",Note
+1,"This table replaces CANSIM table 355-0001 which archived with the release of the November 2007 data."
+2,"Due to rounding, components may not add to total."
+3,"For reference year 1998 and January, February and March 1999, the Canada total includes the territories, but the territory data are not available."
+4,"At the Canada level, seasonally adjusted data are only available for receipts. At the provincial and territorial levels, seasonally adjusted data are only available for the receipts of total, food services and drinking places."
+6,"Starting January 2013, the North American Industry Classification System (NAICS) code 7221 was replaced by 722511."
+7,"Starting January 2013, the North American Industry Classification System (NAICS) code 7222 was replaced by 722512."
+
+"Correction ID","Correction Date","Correction Note"
