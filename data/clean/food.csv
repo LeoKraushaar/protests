@@ -1,0 +1,300 @@
+"REF_DATE","GEO","VALUE"
+"2022-01","Newfoundland and Labrador",64729
+"2022-02","Newfoundland and Labrador",73373
+"2022-03","Newfoundland and Labrador",75167
+"2022-04","Newfoundland and Labrador",78292
+"2022-05","Newfoundland and Labrador",75795
+"2022-06","Newfoundland and Labrador",76517
+"2022-07","Newfoundland and Labrador",78953
+"2022-08","Newfoundland and Labrador",78940
+"2022-09","Newfoundland and Labrador",78517
+"2022-10","Newfoundland and Labrador",80626
+"2022-11","Newfoundland and Labrador",80491
+"2022-12","Newfoundland and Labrador",83785
+"2023-01","Newfoundland and Labrador",87327
+"2023-02","Newfoundland and Labrador",88158
+"2023-03","Newfoundland and Labrador",87692
+"2023-04","Newfoundland and Labrador",87680
+"2023-05","Newfoundland and Labrador",84497
+"2023-06","Newfoundland and Labrador",84217
+"2023-07","Newfoundland and Labrador",86202
+"2023-08","Newfoundland and Labrador",84345
+"2023-09","Newfoundland and Labrador",84021
+"2023-10","Newfoundland and Labrador",86490
+"2023-11","Newfoundland and Labrador",86942
+"2022-01","Prince Edward Island",23022
+"2022-02","Prince Edward Island",28763
+"2022-03","Prince Edward Island",29575
+"2022-04","Prince Edward Island",30470
+"2022-05","Prince Edward Island",31544
+"2022-06","Prince Edward Island",31796
+"2022-07","Prince Edward Island",33269
+"2022-08","Prince Edward Island",33239
+"2022-09","Prince Edward Island",32937
+"2022-10","Prince Edward Island",34005
+"2022-11","Prince Edward Island",34070
+"2022-12","Prince Edward Island",33960
+"2023-01","Prince Edward Island",35689
+"2023-02","Prince Edward Island",36768
+"2023-03","Prince Edward Island",35617
+"2023-04","Prince Edward Island",36011
+"2023-05","Prince Edward Island",35898
+"2023-06","Prince Edward Island",35633
+"2023-07","Prince Edward Island",36184
+"2023-08","Prince Edward Island",35823
+"2023-09","Prince Edward Island",35896
+"2023-10","Prince Edward Island",35466
+"2023-11","Prince Edward Island",36342
+"2022-01","Nova Scotia",129962
+"2022-02","Nova Scotia",153436
+"2022-03","Nova Scotia",161994
+"2022-04","Nova Scotia",164055
+"2022-05","Nova Scotia",164730
+"2022-06","Nova Scotia",165816
+"2022-07","Nova Scotia",169077
+"2022-08","Nova Scotia",166828
+"2022-09","Nova Scotia",165903
+"2022-10","Nova Scotia",172218
+"2022-11","Nova Scotia",172396
+"2022-12","Nova Scotia",174339
+"2023-01","Nova Scotia",185422
+"2023-02","Nova Scotia",184107
+"2023-03","Nova Scotia",180368
+"2023-04","Nova Scotia",182887
+"2023-05","Nova Scotia",178973
+"2023-06","Nova Scotia",178486
+"2023-07","Nova Scotia",183019
+"2023-08","Nova Scotia",177126
+"2023-09","Nova Scotia",178627
+"2023-10","Nova Scotia",180974
+"2023-11","Nova Scotia",185277
+"2022-01","New Brunswick",91605
+"2022-02","New Brunswick",110261
+"2022-03","New Brunswick",113005
+"2022-04","New Brunswick",116742
+"2022-05","New Brunswick",115208
+"2022-06","New Brunswick",114825
+"2022-07","New Brunswick",117738
+"2022-08","New Brunswick",116593
+"2022-09","New Brunswick",117393
+"2022-10","New Brunswick",121999
+"2022-11","New Brunswick",121153
+"2022-12","New Brunswick",121964
+"2023-01","New Brunswick",128232
+"2023-02","New Brunswick",129806
+"2023-03","New Brunswick",125981
+"2023-04","New Brunswick",128235
+"2023-05","New Brunswick",126389
+"2023-06","New Brunswick",124708
+"2023-07","New Brunswick",127890
+"2023-08","New Brunswick",125756
+"2023-09","New Brunswick",124672
+"2023-10","New Brunswick",129902
+"2023-11","New Brunswick",130937
+"2022-01","Quebec",884990
+"2022-02","Quebec",1208015
+"2022-03","Quebec",1297521
+"2022-04","Quebec",1314059
+"2022-05","Quebec",1344361
+"2022-06","Quebec",1369086
+"2022-07","Quebec",1378093
+"2022-08","Quebec",1395697
+"2022-09","Quebec",1447569
+"2022-10","Quebec",1448887
+"2022-11","Quebec",1456634
+"2022-12","Quebec",1456824
+"2023-01","Quebec",1518861
+"2023-02","Quebec",1508682
+"2023-03","Quebec",1465637
+"2023-04","Quebec",1487126
+"2023-05","Quebec",1465317
+"2023-06","Quebec",1470603
+"2023-07","Quebec",1494615
+"2023-08","Quebec",1507407
+"2023-09","Quebec",1528758
+"2023-10","Quebec",1534894
+"2023-11","Quebec",1550373
+"2022-01","Ontario",1916531
+"2022-02","Ontario",2423818
+"2022-03","Ontario",2668843
+"2022-04","Ontario",2682207
+"2022-05","Ontario",2748368
+"2022-06","Ontario",2772241
+"2022-07","Ontario",2791722
+"2022-08","Ontario",2754474
+"2022-09","Ontario",2762410
+"2022-10","Ontario",2846806
+"2022-11","Ontario",2836779
+"2022-12","Ontario",2867713
+"2023-01","Ontario",3051555
+"2023-02","Ontario",3050771
+"2023-03","Ontario",3003946
+"2023-04","Ontario",3049643
+"2023-05","Ontario",3049922
+"2023-06","Ontario",3022925
+"2023-07","Ontario",3032179
+"2023-08","Ontario",2988153
+"2023-09","Ontario",3009578
+"2023-10","Ontario",3042934
+"2023-11","Ontario",3084551
+"2022-01","Manitoba",155613
+"2022-02","Manitoba",177460
+"2022-03","Manitoba",193174
+"2022-04","Manitoba",194206
+"2022-05","Manitoba",195297
+"2022-06","Manitoba",198459
+"2022-07","Manitoba",199626
+"2022-08","Manitoba",198691
+"2022-09","Manitoba",202024
+"2022-10","Manitoba",204940
+"2022-11","Manitoba",208114
+"2022-12","Manitoba",208406
+"2023-01","Manitoba",219319
+"2023-02","Manitoba",219486
+"2023-03","Manitoba",212881
+"2023-04","Manitoba",216687
+"2023-05","Manitoba",210574
+"2023-06","Manitoba",212026
+"2023-07","Manitoba",213333
+"2023-08","Manitoba",211168
+"2023-09","Manitoba",212430
+"2023-10","Manitoba",214117
+"2023-11","Manitoba",218308
+"2022-01","Saskatchewan",157493
+"2022-02","Saskatchewan",173912
+"2022-03","Saskatchewan",175247
+"2022-04","Saskatchewan",178681
+"2022-05","Saskatchewan",178919
+"2022-06","Saskatchewan",182096
+"2022-07","Saskatchewan",183438
+"2022-08","Saskatchewan",181882
+"2022-09","Saskatchewan",183806
+"2022-10","Saskatchewan",187286
+"2022-11","Saskatchewan",190565
+"2022-12","Saskatchewan",193297
+"2023-01","Saskatchewan",202118
+"2023-02","Saskatchewan",202518
+"2023-03","Saskatchewan",199121
+"2023-04","Saskatchewan",200846
+"2023-05","Saskatchewan",196633
+"2023-06","Saskatchewan",197087
+"2023-07","Saskatchewan",196461
+"2023-08","Saskatchewan",193552
+"2023-09","Saskatchewan",196160
+"2023-10","Saskatchewan",198505
+"2023-11","Saskatchewan",203970
+"2022-01","Alberta",759775
+"2022-02","Alberta",843495
+"2022-03","Alberta",864944
+"2022-04","Alberta",868863
+"2022-05","Alberta",872710
+"2022-06","Alberta",883030
+"2022-07","Alberta",892786
+"2022-08","Alberta",906253
+"2022-09","Alberta",920380
+"2022-10","Alberta",929684
+"2022-11","Alberta",912873
+"2022-12","Alberta",937555
+"2023-01","Alberta",999786
+"2023-02","Alberta",995741
+"2023-03","Alberta",970178
+"2023-04","Alberta",992381
+"2023-05","Alberta",982998
+"2023-06","Alberta",985279
+"2023-07","Alberta",995174
+"2023-08","Alberta",996700
+"2023-09","Alberta",1004084
+"2023-10","Alberta",1020938
+"2023-11","Alberta",1019426
+"2022-01","British Columbia",1033526
+"2022-02","British Columbia",1187563
+"2022-03","British Columbia",1202772
+"2022-04","British Columbia",1222442
+"2022-05","British Columbia",1218189
+"2022-06","British Columbia",1231272
+"2022-07","British Columbia",1220378
+"2022-08","British Columbia",1233372
+"2022-09","British Columbia",1265416
+"2022-10","British Columbia",1280830
+"2022-11","British Columbia",1278621
+"2022-12","British Columbia",1285432
+"2023-01","British Columbia",1363389
+"2023-02","British Columbia",1376694
+"2023-03","British Columbia",1343740
+"2023-04","British Columbia",1334064
+"2023-05","British Columbia",1341334
+"2023-06","British Columbia",1343375
+"2023-07","British Columbia",1342882
+"2023-08","British Columbia",1330385
+"2023-09","British Columbia",1351233
+"2023-10","British Columbia",1360250
+"2023-11","British Columbia",1368515
+"2022-01","Yukon",6125
+"2022-02","Yukon",6918
+"2022-03","Yukon",7045
+"2022-04","Yukon",7819
+"2022-05","Yukon",7643
+"2022-06","Yukon",7702
+"2022-07","Yukon",7596
+"2022-08","Yukon",7493
+"2022-09","Yukon",7697
+"2022-10","Yukon",7527
+"2022-11","Yukon",7703
+"2022-12","Yukon",7697
+"2023-01","Yukon",NA
+"2023-02","Yukon",8469
+"2023-03","Yukon",8194
+"2023-04","Yukon",8793
+"2023-05","Yukon",9257
+"2023-06","Yukon",9234
+"2023-07","Yukon",9229
+"2023-08","Yukon",9097
+"2023-09","Yukon",9221
+"2023-10","Yukon",9268
+"2023-11","Yukon",9460
+"2022-01","Northwest Territories",4711
+"2022-02","Northwest Territories",5382
+"2022-03","Northwest Territories",5505
+"2022-04","Northwest Territories",5724
+"2022-05","Northwest Territories",5830
+"2022-06","Northwest Territories",5855
+"2022-07","Northwest Territories",5914
+"2022-08","Northwest Territories",5832
+"2022-09","Northwest Territories",5978
+"2022-10","Northwest Territories",6039
+"2022-11","Northwest Territories",6286
+"2022-12","Northwest Territories",6427
+"2023-01","Northwest Territories",6592
+"2023-02","Northwest Territories",6493
+"2023-03","Northwest Territories",NA
+"2023-04","Northwest Territories",6344
+"2023-05","Northwest Territories",6574
+"2023-06","Northwest Territories",6503
+"2023-07","Northwest Territories",6275
+"2023-08","Northwest Territories",4553
+"2023-09","Northwest Territories",5178
+"2023-10","Northwest Territories",6509
+"2023-11","Northwest Territories",6494
+"2022-01","Nunavut",1473
+"2022-02","Nunavut",2155
+"2022-03","Nunavut",2467
+"2022-04","Nunavut",1861
+"2022-05","Nunavut",NA
+"2022-06","Nunavut",2376
+"2022-07","Nunavut",2360
+"2022-08","Nunavut",2375
+"2022-09","Nunavut",2237
+"2022-10","Nunavut",2333
+"2022-11","Nunavut",NA
+"2022-12","Nunavut",NA
+"2023-01","Nunavut",2232
+"2023-02","Nunavut",2341
+"2023-03","Nunavut",2249
+"2023-04","Nunavut",2639
+"2023-05","Nunavut",NA
+"2023-06","Nunavut",2872
+"2023-07","Nunavut",NA
+"2023-08","Nunavut",3238
+"2023-09","Nunavut",3058
+"2023-10","Nunavut",3715
+"2023-11","Nunavut",4652
