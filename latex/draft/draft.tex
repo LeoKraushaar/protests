@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 % Packages
 \usepackage{amsmath} % For mathematical symbols and equations
@@ -28,25 +28,64 @@
 }
 
 % Title and author
+\title{Title}
+\author{Leo Kraushaar \& Ali Hay \\ STAT 413}
+\date{\today}
+
 \begin{document}
 \onehalfspacing
 
 \begin{titlepage}
-    \centering
-    \vfill
-    \vspace{3cm}
-    {\scshape\LARGE University of Alberta \par}
-    \vspace{5cm}
-    {\huge\bfseries Title \par}
-    \vspace{1cm}
-    {\Large\itshape Leo Kraushaar \& Ali Hay\par}
-    \vfill
-    \vspace{12cm}
-    {\Large\itshape Department of Statistics \par}
-    \vspace{0.5cm}
-    {\large \today\par}
+    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+    \center
+    
+    \HRule \\[1cm]
+    { \huge \bfseries \thetitle}\\[0.4cm] 
+    \HRule \\[1.8cm]
+    
+    \Large \thedate\\[5cm]
+    
+    \begin{minipage}{1\textwidth}
+    \vspace{10cm}
+    \begin{flushleft} \large
+    \theauthor
+    \end{flushleft}
+
+    \end{minipage}
+
+    
 \end{titlepage}
-\pagebreak
+
+\newpage
+\section{Introduction}
+
+\newpage
+\section{Model Building}
+\subsection{Fitting Process}
+\subsection{Model Overview}
+
+\newpage
+\section{Bootstrapping for Feature Significance}
+\subsection{Resampling Bootstrap}
+\subsubsection*{Procedure}
+\subsubsection*{Results}
+
+\subsection{Parametric Bootstrap}
+\subsubsection*{Procedure}
+\subsubsection*{Results}
+
+\subsection{Smooth Bootstrap}
+\subsubsection*{Procedure}
+\subsubsection*{Results}
+
+\subsection{Method Comparison}
+
+
+\newpage
+\section{Monte Carlo Estimation}
+
+\newpage
+\section{Conclusion}
 
 
  
