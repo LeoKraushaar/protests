@@ -16,9 +16,8 @@
 \lstset{
     language=R, % Set the language for code snippets to R
     basicstyle=\ttfamily\small, % Set the font and size for code snippets
-    keywordstyle=\color{blue}, % Set the color for keywords
     commentstyle=\color{green!60!black}, % Set the color for comments
-    stringstyle=\color{red}, % Set the color for strings
+    stringstyle=\color{orange}, % Set the color for strings
     showstringspaces=false, % Don't show spaces in strings
     breaklines=true, % Allow code to break across lines
     frame=single, % Add a frame around code snippets
@@ -66,7 +65,7 @@
 \section{Bootstrapping for Feature Significance}
 \subsection{Resampling Bootstrap}
 \subsubsection*{Procedure}
-Using $B = 10000$, an algorithm was written to perform a resampling bootstrap on the dataset. On each iteration, a sample of size $n$ (where $n$ was the number of rows in the dataset) was taken with replacement. Using this sample, a new model was fit. The parameter estimates were recorded.
+Using $B = 10000$, an algorithm was written to perform a resampling bootstrap on the dataset. On each iteration, a sample of size $n$ (where $n$ was the number of rows in the dataset) was taken with replacement. Using this sample, a new model was fit. The parameter estimates were recorded. Relevant code is shown below.
 
 \vspace{1cm}
 \begin{lstlisting}[language=R]
@@ -94,51 +93,238 @@ resampBoot <- function(df, B) {
 \end{lstlisting}
 
 \subsubsection*{Results}
-
-\begin{table}[hb!]
+\begin{table}[hbt!]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|}
-        \hline
-     & \textbf{mean} & \textbf{sd} & \textbf{2.5\%} & \textbf{50\%} & \textbf{97.5\%} & \textbf{contains 0} \\ 
-        \hline
-    intercept & 3.62 & 0.49 & 2.64 & 3.63 & 4.57 & FALSE \\ 
-      Aug & -0.71 & 0.16 & -1.02 & -0.71 & -0.40 & FALSE \\ 
-      Dec & -0.64 & 0.36 & -1.07 & -0.62 & -0.29 & FALSE \\ 
-      Feb & 0.04 & 0.16 & -0.26 & 0.04 & 0.36 & TRUE \\ 
-      Jan & -0.34 & 0.16 & -0.64 & -0.34 & -0.02 & FALSE \\ 
-      Jul & -0.56 & 0.16 & -0.87 & -0.56 & -0.23 & FALSE \\ 
-      Jun & -0.35 & 0.13 & -0.61 & -0.35 & -0.09 & FALSE \\ 
-      Mar & -0.11 & 0.15 & -0.39 & -0.11 & 0.18 & TRUE \\ 
-      May & -0.03 & 0.14 & -0.30 & -0.03 & 0.25 & TRUE \\ 
-      Nov & -0.08 & 0.14 & -0.37 & -0.08 & 0.20 & TRUE \\ 
-      Oct & 0.04 & 0.14 & -0.23 & 0.03 & 0.32 & TRUE \\ 
-      Sep & 0.10 & 0.13 & -0.15 & 0.10 & 0.36 & TRUE \\ 
-      BC & 0.82 & 0.13 & 0.55 & 0.82 & 1.08 & FALSE \\ 
-      M & -1.87 & 0.87 & -3.56 & -1.89 & -0.11 & FALSE \\ 
-      NB & -2.58 & 0.99 & -4.49 & -2.59 & -0.57 & FALSE \\ 
-      NL & -3.01 & 1.05 & -5.05 & -3.03 & -0.86 & FALSE \\ 
-      NT & -5.37 & 1.33 & -7.81 & -5.37 & -2.90 & FALSE \\ 
-      NS & -2.36 & 0.94 & -4.18 & -2.37 & -0.44 & FALSE \\ 
-      N & -4.95 & 1.20 & -7.28 & -4.97 & -2.53 & FALSE \\ 
-      O & 5.49 & 2.23 & 0.96 & 5.52 & 9.81 & FALSE \\ 
-      PEI & -4.07 & 1.16 & -6.30 & -4.07 & -1.72 & FALSE \\ 
-      Q & 2.16 & 0.83 & 0.49 & 2.17 & 3.79 & FALSE \\ 
-      S & -2.54 & 0.90 & -4.29 & -2.56 & -0.73 & FALSE \\ 
-      Y & -4.08 & 1.18 & -6.39 & -4.10 & -1.70 & FALSE \\ 
-      retail & -1.80 & 0.98 & -3.70 & -1.81 & 0.18 & TRUE \\ 
+    \begin{tabular}{|l|c|c|c|c|c|c|}
       \hline
+     & mean & sd & 2.5\% & 50\% & 97.5\% & sig \\ 
+      \hline
+    intercept & 3.66 & 0.53 & 2.70 & 3.64 & 4.77 & TRUE \\ 
+      Spr & -0.06 & 0.08 & -0.23 & -0.06 & 0.09 & FALSE \\ 
+      Sum & -0.55 & 0.08 & -0.72 & -0.55 & -0.38 & TRUE \\ 
+      Win & -0.24 & 0.10 & -0.42 & -0.23 & -0.05 & TRUE \\ 
+      BC & 0.82 & 0.14 & 0.55 & 0.82 & 1.09 & TRUE \\ 
+      M & -1.89 & 0.93 & -3.85 & -1.85 & -0.18 & TRUE \\ 
+      NB & -2.60 & 1.06 & -4.84 & -2.55 & -0.66 & TRUE \\ 
+      NL & -3.04 & 1.13 & -5.43 & -2.98 & -0.99 & TRUE \\ 
+      NT & -5.40 & 1.37 & -8.20 & -5.34 & -2.94 & TRUE \\ 
+      NS & -2.38 & 1.00 & -4.53 & -2.34 & -0.54 & TRUE \\ 
+      N & -4.98 & 1.28 & -7.68 & -4.92 & -2.61 & TRUE \\ 
+      O & 5.54 & 2.37 & 1.18 & 5.40 & 10.58 & TRUE \\ 
+      PEI & -4.10 & 1.23 & -6.73 & -4.04 & -1.82 & TRUE \\ 
+      Q & 2.17 & 0.88 & 0.55 & 2.12 & 4.04 & TRUE \\ 
+      S & -2.56 & 0.96 & -4.57 & -2.52 & -0.77 & TRUE \\ 
+      Y & -4.11 & 1.26 & -6.77 & -4.06 & -1.81 & TRUE \\ 
+      retail & -1.83 & 1.04 & -4.05 & -1.77 & 0.08 & FALSE \\ 
+       \hline
     \end{tabular}
 \end{table}
-
 \newpage
 \subsection{Parametric Bootstrap}
 \subsubsection*{Procedure}
-\subsubsection*{Results}
+Using $B = 10000$, an algorithm was written to perform a parametric bootstrap on the dataset.
 
+Using the estimated dispersion parameter $\theta \approx 8.36$, each iteration sampled a random vector from a negative binomial distribution. The distribution had dispersion parameter $\theta$ and mean $\hat y$, where $\hat y$ was the predicted mean value for the corresponding input values.
+
+Using these new estimates, a model was fit on each iteration and the parameter estimates were recorded. Relevant code is shown below.
+
+\begin{lstlisting}
+conditionalNegBinom <- function(theta, mu) {
+    nb_sample <- rnbinom(size=theta, mu=mu, n=1)
+    return(nb_sample)
+}
+
+paramBoot <- function(B, X, yhat, theta, func) {
+
+    # Initialize empty vector
+    params <- c()
+    # Iterate B times
+    for (b in 1:B) {
+        # Simulate NB given means
+        sim_y <- sapply(yhat, function(y) func(theta, y))
+        # Add to the dataframe
+        sim_data <- cbind(X, protests=sim_y)
+        # Fit the model to the simulated data
+        sim_model <- glm.nb(protests ~., data=sim_data, init.theta = theta)
+        # Access the coefficients and store
+        parameters <- coef(sim_model)
+        params <- rbind(params, parameters)
+    }
+    return(params)
+}
+\end{lstlisting}
+\subsubsection*{Results}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|}
+      \hline
+     & mean & sd & 2.5\% & 50\% & 97.5\% & sig \\ 
+      \hline
+    intercept & 3.68 & 0.51 & 2.68 & 3.68 & 4.69 & TRUE \\ 
+      Spr & -0.07 & 0.08 & -0.23 & -0.07 & 0.10 & FALSE \\ 
+      Sum & -0.55 & 0.09 & -0.72 & -0.55 & -0.38 & TRUE \\ 
+      Win & -0.23 & 0.09 & -0.41 & -0.23 & -0.05 & TRUE \\ 
+      BC & 0.82 & 0.16 & 0.51 & 0.82 & 1.14 & TRUE \\ 
+      M & -1.92 & 0.92 & -3.75 & -1.91 & -0.11 & TRUE \\ 
+      NB & -2.63 & 1.05 & -4.72 & -2.63 & -0.57 & TRUE \\ 
+      NL & -3.08 & 1.11 & -5.31 & -3.06 & -0.89 & TRUE \\ 
+      NT & -5.41 & 1.27 & -7.92 & -5.39 & -2.91 & TRUE \\ 
+      NS & -2.42 & 1.00 & -4.39 & -2.41 & -0.46 & TRUE \\ 
+      N & -5.01 & 1.27 & -7.52 & -5.01 & -2.53 & TRUE \\ 
+      O & 5.61 & 2.45 & 0.80 & 5.59 & 10.51 & TRUE \\ 
+      PEI & -4.13 & 1.22 & -6.54 & -4.12 & -1.73 & TRUE \\ 
+      Q & 2.20 & 0.93 & 0.36 & 2.19 & 4.07 & TRUE \\ 
+      S & -2.59 & 0.94 & -4.46 & -2.57 & -0.75 & TRUE \\ 
+      Y & -4.15 & 1.25 & -6.61 & -4.14 & -1.71 & TRUE \\ 
+      retail & -1.86 & 1.07 & -3.98 & -1.85 & 0.23 & FALSE \\ 
+       \hline
+    \end{tabular}
+\end{table}
 \subsection{Smooth Bootstrap}
-\subsubsection*{Procedure}
-\subsubsection*{Results}
+The smooth bootstrap is not an ``ideal'' method for the given dataset, as only one predictor \textbf{(retail)} was continuous and real-valued. However, results were consistent with other methods, as discussed later.
 
+Again using $B = 10000$, an algorithm was written to perform a smooth bootstrap. The \textbf{retail} column was found to have a sample variance of 1, due to the fact that it was standardized prior to model building. A reasonable value for the noise term was chosen, that is, $\frac{1}{\sqrt{n}} \approx 0.05783$. On each iteration, some $\varepsilon_i$ was added to each row $i$, where $\varepsilon \sim N(0, 0.05783)$. Using this ``new'' dataset, a model was fit and the paramter estimates were recorded. Relevant code is shown below.
+
+\subsubsection*{Procedure}
+\begin{lstlisting}
+addNoise <- function(X) {
+
+    cols <- colnames(X)
+    new_X <- X
+    for (col in cols) {
+        Xi <- X[, col]
+        if (class(data[, col]) != "factor") {
+            n <- length(Xi)
+            S_sq <- var(Xi)
+            noise_var <- S_sq / n
+            new_X[, col] <- Xi + rnorm(n=n, mean=0, sd=sqrt(noise_var))
+        } else {
+            new_X[, col] <- Xi
+        }
+    }
+    return(new_X)
+}
+
+smoothBoot <- function(X, y, B, noisefunc) {
+
+    # Get sample size
+    n <- nrow(X)
+    # Initialize empty vector
+    params <- c()
+    
+    # Initialize progress bar
+    pb <- txtProgressBar(min = 0, max = B, style = 3)
+    
+    # Perform B iterations
+    for (b in 1:B) {
+        # Update progress bar
+        setTxtProgressBar(pb, b)
+        
+        # Get new dataset
+        new_X <- noisefunc(X)
+        new_data <- data.frame(protests=y, new_X)
+        
+        # Fit the model with the simulated data
+        smoothboot_model <- glm.nb(protests ~., data=new_data, init.theta = 5)
+        boot_params <- coef(smoothboot_model)
+        params <- rbind(params, boot_params)
+    }
+    
+    # Close progress bar
+    close(pb)
+    
+    return(params)
+}
+\end{lstlisting}
+\subsubsection*{Results}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|}
+      \hline
+     & mean & sd & 2.5\% & 50\% & 97.5\% & sig \\ 
+      \hline
+    intercept & 3.00 & 0.21 & 2.58 & 3.01 & 3.42 & TRUE \\ 
+      Spr & -0.04 & 0.01 & -0.07 & -0.04 & -0.03 & TRUE \\ 
+      Sum & -0.55 & 0.01 & -0.56 & -0.55 & -0.54 & TRUE \\ 
+      Win & -0.20 & 0.01 & -0.23 & -0.20 & -0.18 & TRUE \\ 
+      BC & 0.67 & 0.05 & 0.57 & 0.67 & 0.76 & TRUE \\ 
+      M & -0.67 & 0.39 & -1.43 & -0.68 & 0.10 & FALSE \\ 
+      NB & -1.21 & 0.44 & -2.08 & -1.22 & -0.33 & TRUE \\ 
+      NL & -1.56 & 0.47 & -2.49 & -1.57 & -0.62 & TRUE \\ 
+      NT & -3.68 & 0.52 & -4.70 & -3.68 & -2.63 & TRUE \\ 
+      NS & -1.07 & 0.42 & -1.89 & -1.08 & -0.23 & TRUE \\ 
+      N & -3.30 & 0.53 & -4.33 & -3.30 & -2.24 & TRUE \\ 
+      O & 2.24 & 1.05 & 0.14 & 2.25 & 4.29 & TRUE \\ 
+      PEI & -2.47 & 0.51 & -3.48 & -2.48 & -1.45 & TRUE \\ 
+      Q & 0.92 & 0.40 & 0.13 & 0.92 & 1.69 & TRUE \\ 
+      S & -1.31 & 0.40 & -2.09 & -1.32 & -0.52 & TRUE \\ 
+      Y & -2.46 & 0.52 & -3.49 & -2.47 & -1.41 & TRUE \\ 
+      retail & -0.39 & 0.45 & -1.29 & -0.40 & 0.52 & FALSE \\ 
+       \hline
+    \end{tabular}
+\end{table}
+    
+
+\subsection{Error-Sampling Bootstrap}
+Another bootstrap method was implemented, in which the error terms from the fitted model were randomly sampled with replacement, and added to the fitted values. Notably, some resulting simulated counts were rounded up to zero in the case where a negative value was produced. This was required both logically; as protests counts cannot be negative, and mathematically; as the negative binomial glm cannot be fit with negative training outputs. As a result, the integrity of the simulated datasets was not assumed to be completely intact. That being said, the results were quite consistent with the previous methods.
+
+\subsubsection*{Procedure}
+
+\begin{lstlisting}
+epsilonBoot <- function(X, model, B, errors) {
+
+    # Get sample size
+    n <- nrow(X)
+    # Initialize empty vector
+    params <- c()
+    # Perform B iterations
+    for (b in 1:B) {
+        # Get errors
+        errs <- sample(errors, size=n, replace=TRUE)
+        # Get fitted values
+        yhat <- fitted(model)
+        # Get simulated y
+        ystar <- yhat + errs
+        # round up negative values
+        ystar <- pmax(rep(0, n), ystar)
+        # Turn into DataFrame
+        sim_data <- data.frame(protests=ystar, X)
+        # Fit the model with the simulated data
+        paramboot_model <- glm.nb(protests ~., data=sim_data, init.theta = 5)
+        boot_params <- coef(paramboot_model)
+        params <- rbind(params, boot_params)
+    }
+    return(params)
+}
+\end{lstlisting}
+\subsubsection*{Results}
+\begin{table}[hbt!]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|}
+      \hline
+     & mean & sd & 2.5\% & 50\% & 97.5\% & sig \\ 
+      \hline
+    intercept & 3.68 & 0.51 & 2.68 & 3.68 & 4.69 & TRUE \\ 
+      Spr & -0.07 & 0.08 & -0.23 & -0.07 & 0.10 & FALSE \\ 
+      Sum & -0.55 & 0.09 & -0.72 & -0.55 & -0.38 & TRUE \\ 
+      Win & -0.23 & 0.09 & -0.41 & -0.23 & -0.05 & TRUE \\ 
+      BC & 0.82 & 0.16 & 0.51 & 0.82 & 1.14 & TRUE \\ 
+      M & -1.92 & 0.92 & -3.75 & -1.91 & -0.11 & TRUE \\ 
+      NB & -2.63 & 1.05 & -4.72 & -2.63 & -0.57 & TRUE \\ 
+      NL & -3.08 & 1.11 & -5.31 & -3.06 & -0.89 & TRUE \\ 
+      NT & -5.41 & 1.27 & -7.92 & -5.39 & -2.91 & TRUE \\ 
+      NS & -2.42 & 1.00 & -4.39 & -2.41 & -0.46 & TRUE \\ 
+      N & -5.01 & 1.27 & -7.52 & -5.01 & -2.53 & TRUE \\ 
+      O & 5.61 & 2.45 & 0.80 & 5.59 & 10.51 & TRUE \\ 
+      PEI & -4.13 & 1.22 & -6.54 & -4.12 & -1.73 & TRUE \\ 
+      Q & 2.20 & 0.93 & 0.36 & 2.19 & 4.07 & TRUE \\ 
+      S & -2.59 & 0.94 & -4.46 & -2.57 & -0.75 & TRUE \\ 
+      Y & -4.15 & 1.25 & -6.61 & -4.14 & -1.71 & TRUE \\ 
+      retail & -1.86 & 1.07 & -3.98 & -1.85 & 0.23 & FALSE \\ 
+       \hline
+    \end{tabular}
+\end{table}
+    
 \subsection{Method Comparison}
 
 
