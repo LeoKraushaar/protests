@@ -52,8 +52,6 @@
     \end{flushleft}
 
     \end{minipage}
-
-    
 \end{titlepage}
 
 \newpage
@@ -68,8 +66,71 @@
 \section{Bootstrapping for Feature Significance}
 \subsection{Resampling Bootstrap}
 \subsubsection*{Procedure}
+Using $B = 10000$, an algorithm was written to perform a resampling bootstrap on the dataset. On each iteration, a sample of size $n$ (where $n$ was the number of rows in the dataset) was taken with replacement. Using this sample, a new model was fit. The parameter estimates were recorded.
+
+\vspace{1cm}
+\begin{lstlisting}[language=R]
+resampBoot <- function(df, B) {
+    # Get sample size
+    n <- nrow(df)
+    # Initialize empty dataframe
+    params <- c()
+    # Initialize progress bar
+    bar <- txtProgressBar(min=0, max=B, style=1)
+    # Perform B iterations
+    for (b in 1:B) {
+        # Select a sample of size n
+        indices <- sample(1:n, replace = TRUE)
+        samp <- df[indices, ]
+        # Fit the model with the sample
+        boot_model <- glm.nb(protests ~., data=samp, init.theta = 10)
+        boot_params <- coef(boot_model)
+        params <- rbind(params, boot_params)
+        setTxtProgressBar(bar, b)
+    }
+    close(bar)
+    return(params)
+}
+\end{lstlisting}
+
 \subsubsection*{Results}
 
+\begin{table}[hb!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+     & \textbf{mean} & \textbf{sd} & \textbf{2.5\%} & \textbf{50\%} & \textbf{97.5\%} & \textbf{contains 0} \\ 
+        \hline
+    intercept & 3.62 & 0.49 & 2.64 & 3.63 & 4.57 & FALSE \\ 
+      Aug & -0.71 & 0.16 & -1.02 & -0.71 & -0.40 & FALSE \\ 
+      Dec & -0.64 & 0.36 & -1.07 & -0.62 & -0.29 & FALSE \\ 
+      Feb & 0.04 & 0.16 & -0.26 & 0.04 & 0.36 & TRUE \\ 
+      Jan & -0.34 & 0.16 & -0.64 & -0.34 & -0.02 & FALSE \\ 
+      Jul & -0.56 & 0.16 & -0.87 & -0.56 & -0.23 & FALSE \\ 
+      Jun & -0.35 & 0.13 & -0.61 & -0.35 & -0.09 & FALSE \\ 
+      Mar & -0.11 & 0.15 & -0.39 & -0.11 & 0.18 & TRUE \\ 
+      May & -0.03 & 0.14 & -0.30 & -0.03 & 0.25 & TRUE \\ 
+      Nov & -0.08 & 0.14 & -0.37 & -0.08 & 0.20 & TRUE \\ 
+      Oct & 0.04 & 0.14 & -0.23 & 0.03 & 0.32 & TRUE \\ 
+      Sep & 0.10 & 0.13 & -0.15 & 0.10 & 0.36 & TRUE \\ 
+      BC & 0.82 & 0.13 & 0.55 & 0.82 & 1.08 & FALSE \\ 
+      M & -1.87 & 0.87 & -3.56 & -1.89 & -0.11 & FALSE \\ 
+      NB & -2.58 & 0.99 & -4.49 & -2.59 & -0.57 & FALSE \\ 
+      NL & -3.01 & 1.05 & -5.05 & -3.03 & -0.86 & FALSE \\ 
+      NT & -5.37 & 1.33 & -7.81 & -5.37 & -2.90 & FALSE \\ 
+      NS & -2.36 & 0.94 & -4.18 & -2.37 & -0.44 & FALSE \\ 
+      N & -4.95 & 1.20 & -7.28 & -4.97 & -2.53 & FALSE \\ 
+      O & 5.49 & 2.23 & 0.96 & 5.52 & 9.81 & FALSE \\ 
+      PEI & -4.07 & 1.16 & -6.30 & -4.07 & -1.72 & FALSE \\ 
+      Q & 2.16 & 0.83 & 0.49 & 2.17 & 3.79 & FALSE \\ 
+      S & -2.54 & 0.90 & -4.29 & -2.56 & -0.73 & FALSE \\ 
+      Y & -4.08 & 1.18 & -6.39 & -4.10 & -1.70 & FALSE \\ 
+      retail & -1.80 & 0.98 & -3.70 & -1.81 & 0.18 & TRUE \\ 
+      \hline
+    \end{tabular}
+\end{table}
+
+\newpage
 \subsection{Parametric Bootstrap}
 \subsubsection*{Procedure}
 \subsubsection*{Results}
