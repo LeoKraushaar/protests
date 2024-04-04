@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1712192437.41779 "/home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/draft/draft.tex" "draft.pdf" "draft" 1712192438.2531 0
-  "/home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/draft/draft.tex" 1712192437.1612 12683 74d038d19d6c24dac0c3489ebbc675cd ""
+["pdflatex"] 1712195218.52129 "/home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/draft/draft.tex" "draft.pdf" "draft" 1712195219.34248 0
+  "/home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/draft/draft.tex" 1712195217.49063 19818 414194c90b707cfb3d574e542f634f09 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -96,9 +96,9 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1689984000 40900 887e0dc8cac988a9e9c574af364cf837 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1712012157.2935 4547809 72a019b3ea2e5a9ca986a536dc67eb1c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1712011866 7871999 8b37e21f8d77420b219adc2277308a89 ""
-  "draft.aux" 1712192438.12421 2013 0414512c89915d39feaec17b95928019 "pdflatex"
-  "draft.out" 1712192438.12421 1766 e9d39645784bb4ad4fcc32a84854dec1 "pdflatex"
-  "draft.tex" 1712192437.1612 12683 74d038d19d6c24dac0c3489ebbc675cd ""
+  "draft.aux" 1712195219.24764 2013 86fe763697ac3e2decc26831cb70d4e3 "pdflatex"
+  "draft.out" 1712195219.24764 1766 e9d39645784bb4ad4fcc32a84854dec1 "pdflatex"
+  "draft.tex" 1712195217.49063 19818 414194c90b707cfb3d574e542f634f09 ""
   (generated)
   "draft.aux"
   "draft.log"
