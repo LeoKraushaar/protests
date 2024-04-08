@@ -13,10 +13,11 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{enumitem}
+\usepackage{float}
 
 \lstset{
     language=R, % Set the language for code snippets to R
-    basicstyle=\ttfamily\small, % Set the font and size for code snippets
+    basicstyle=\ttfamily\scriptsize, % Set the font and size for code snippets
     commentstyle=\color{green!60!black}, % Set the color for comments
     stringstyle=\color{orange}, % Set the color for strings
     showstringspaces=false, % Don't show spaces in strings
@@ -29,7 +30,7 @@
 }
 
 % Title and author
-\title{Title}
+\title{Modeling Canadian Protest Occurrences via Negative Binomial Regression}
 \author{Leo Kraushaar \& Ali Hay \\ STAT 413}
 \date{\today}
 
@@ -42,12 +43,12 @@
 
   \HRule \\[1cm]
   { \huge \bfseries \thetitle}\\[0.4cm]
-  \HRule \\[1.8cm]
+  \HRule \\[1cm]
 
   \Large \thedate\\[5cm]
 
   \begin{minipage}{1\textwidth}
-    \vspace{10cm}
+    \vspace{8cm}
     \begin{flushleft} \large
       \theauthor
     \end{flushleft}
@@ -57,21 +58,19 @@
 
 \newpage
 \section{Introduction}
-For this project, we are working with a data set containing the number of protests each month from January 2022 until November 2023 in every Canadian province and territory.
+For this project, we are working with a dataset containing the number of protests each month from January 2022 until November 2023 in every Canadian province and territory.
 
-Our dataset contained the population size of each province in each month. We also thought it might be interesting to consider the state of the economy in each month over our timeframe, since this could affect how happy individuals are, which could perhaps influence how likely they are to participate in protests. For this reason, we decided to collect some extra data related to economic factors: oil imports in cubic meters, total power generated in megawatt hours, and total retail sales in thousands of dollars.
+Our dataset contained the population size of each province in each month. We also thought it might be interesting to consider the state of the economy in each month over our timeframe, since this could affect how happy individuals are, which could perhaps influence how likely they are to participate in protests. For this reason, we decided to collect some extra data related to economic factors: oil imports (m$^3$), total power generated (MWh), and total retail sales (\$1000).
 
-Our goal in this project is to model the number of protests using our data. Next, we use our model to create confidence intervals, with different bootstrapping methods to determine the most significant parameters in our model. Finally, we use Monte Carlo simulation to create prediction intervals for the monthly number of protests in each province and territory based on projections for model parameters that we simulated for the year 2030.
+Our goal in this project is to model the number of protests via a negative binominal regression model, the reasons for which are discussed later. We use our model to create confidence intervals with different bootstrapping methods to determine the most significant model parameters. Finally, we use Monte Carlo simulation to create prediction intervals for the monthly number of protests in each province and territory based on projections for model parameters that we simulated for the year 2030.
 
-With our dataset, we decided to fit a Negative Binomial Model, as this is an effective model for count data able to accomodate overdispersion. We decided to combine the months into four seasons, as this improved the fit of our model. After fitting our initial model, via stepwise selection, we found season, retail, and province to be significant. We additionally compared these results against resampling bootstrapping, parametric bootstrapping, smooth bootstrapping and error-sampling bootstrapping to create 95\% confidence intervals for identifying which of the model parameters were most significant. Lastly, we used Monte Caro methods to create 95\% prediction intervals for the median number of protests in each Canadian province and territory based on our projected retail sales in the year 2030. We created these retail sales projections using more data on the total retail sales as discussed in later sections of this report.
-Our main algorithms and results are given, summarized, and analyzed throughout this report.
+Prior to model fitting, we merged all data sources into a single dataset, and performed data cleaning techniques such as granularity reduction and standardization. After fitting our initial model via stepwise selection, we found season, retail, and province to be significant. We compared these results against four bootstrapping methods: resampling, parametric, smooth, and error-sampling. The bootstrap methods were used to create 95\% confidence intervals to identify which of the model parameters were most significant. Lastly, we used Monte Carlo methods to create 95\% prediction intervals for the median number of protests in each Canadian province and territory based on projected retail sales in the year 2030. We created the retail sales projections using historical data, discussed in later sections.
+Our primary algorithms and results are included, summarized, and analyzed throughout this report.
 
 \newpage
 \section{Model Building}
-\textcolor{red}{fix table}\\
-For this project, we decided to use a Negative Binomial Generalized Linear Regression Model (glm),
+For this project, we decided to use a negative binomial generalized linear model (glm),which is known to be effective for modeling discrete positive integers (``count data''), the datatype of our response column. The negative binomial model is also known to be resistant to imbalanced expectation/variance ratios (overdispersion), a property notably present in the dataset. We initially fit our model using the predictors \textbf{year, season, province, population, retail, oil, and power}. We standardized the retail predictor before fitting the model, as it was on a much larger scale than the other predictors. We also combined the months into four seasons, as this reduced the standard error of the maximum likelihood estimate of the model's dispersion parameter. Using a stepwise selection method in R, set to minimize model AIC, we created our final model, which contained the significant predictors of season, province, and retail. The final model is shown below, accompanied by relevant scoring metrics and parameter values.
 
-(Fig. 1), as this model works well to model count data, even with over/under-dispersed responses. We initially fit our model using the predictors \textbf{year, season, province, population, retail, oil, and power}. We standardized the retail predictor before fitting the model, as it was on a much larger scale than the other predictors. We also combined the months into four seasons, as this reduced the standard error of the maximum likelihood estimate of the model's dispersion parameter. Using a stepwise selection method in R, set to minimize model AIC, we created our final model, which contained the significant predictors of season, province, and retail. Below is the R output of the final model.
 \begin{verbatim}
 Call:
 glm.nb(formula = protests ~ season + prov + retail, data = data, 
@@ -99,7 +98,7 @@ retail                        -1.85334    1.06448  -1.741 0.081671 .
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-(Dispersion parameter for Negative Binomial(8.3056) family taken to be 1)
+(Dispersion parameter for negative binomial(8.3056) family taken to be 1)
 
     Null deviance: 2091.2  on 298  degrees of freedom
 Residual deviance:  349.2  on 282  degrees of freedom
@@ -130,7 +129,7 @@ Number of Fisher Scoring iterations: 1
 \subsubsection*{Procedure}
 Using $B = 10000$, an algorithm was written to perform a resampling bootstrap on the dataset. On each iteration, a sample of size $n$ (where $n$ was the number of rows in the dataset) was taken with replacement. Using this sample, a new model was fit and the parameter estimates were recorded. Relevant code is shown below.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{lstlisting}[language=R]
 resampBoot <- function(df, B) {
 	# Get sample size
@@ -156,10 +155,10 @@ resampBoot <- function(df, B) {
 \end{lstlisting}
 
 \subsubsection*{Results}
-We used the resampling bootstrap techniques to test whether there was a significant difference in the mean number of protests in each of the different seasons. Our baseline season was fall. The 95\% confidence interval for the spring coefficient did contain 0, but the 95\% confidence intervals for each of the summer and the winter coefficients did not. This tells us that the log mean number of protests in the spring is not significantly different in the spring than the fall, but the log mean number of protests in both the summer and the winter is significantly different than in the fall. Since each of the coefficients for summer and winter are negative, that tells us that there are less protests in both the summer and the winter than there are in the fall.
+We used the resampling bootstrap techniques to test whether there was a significant difference in the mean number of protests in each of the different seasons, with the baseline being fall. The 95\% confidence interval for the spring coefficient did contain 0, but the 95\% confidence intervals for each of the summer and the winter coefficients did not. This tells us that the log mean number of protests in the spring is not significantly different in the spring than the fall, but the log mean number of protests in both the summer and the winter is significantly different than in the fall. Since each of the coefficients for summer and winter are negative and significant, there is strong evidence that protest volume is greater in the fall than in summer and winter.
 
-When using the resampling bootstrap to test for a significant difference in the mean number of protests in each of the different provinces, our baseline province was Alberta. Here, the 95\% confidence intervals for each province and territory showed us that the mean number of protests were significantly different from that of Alberta. British Columbia, Ontario, and Quebec each had a larger mean number of protests than Alberta, whereas the other provinces and territories all had a lower mean number of protests than Alberta.
-Using the resampling bootstrapping techniques, the 95\% confidence interval for the coefficient on retail showed us that retail did not have a significant effect on the mean number of protests.
+When using the resampling bootstrap to test for a significant difference in the mean number of protests in each of the different provinces, our baseline province was Alberta. Here, the 95\% confidence intervals for each province and territory showed us that the mean number of protests were significantly different from that of Alberta. British Columbia, Ontario, and Quebec each had a greater mean number of protests than Alberta, whereas the other provinces and territories all had a lower mean number of protests compared to Alberta.
+Using the resampling bootstrap, the 95\% confidence interval for the coefficient of retail showed us that retail did not have a significant effect on the mean number of protests.
 
 \input{tables/resamp.tex}
 
@@ -168,10 +167,10 @@ Using the resampling bootstrapping techniques, the 95\% confidence interval for 
 \subsubsection*{Procedure}
 Using $B = 10000$, an algorithm was written to perform a parametric bootstrap on the dataset.
 
-Using the estimated dispersion parameter $\theta \approx 8.31$, each iteration sampled a random vector from a negative binomial distribution. The distribution had dispersion parameter $\theta$ and mean $\hat y$, where $\hat y$ was the predicted mean value for the corresponding input values.
+Using the estimated dispersion parameter $\theta \approx 8.31$, each iteration sampled a random vector from a negative binomial distribution with dispersion parameter $\theta$ and mean $\hat y$, where $\hat y$ was the predicted mean value for the corresponding input values.
 
 From the new estimates, a model was fit on each iteration and the parameter estimates were recorded. Relevant code is shown below.
-
+\vspace{0.5cm}
 \begin{lstlisting}
 conditionalNegBinom <- function(theta, mu) {
     nb_sample <- rnbinom(size=theta, mu=mu, n=1)
@@ -197,20 +196,21 @@ paramBoot <- function(B, X, yhat, theta, func) {
     return(params)
 }
 \end{lstlisting}
+
 \subsubsection*{Results}
-When using parametric bootstrapping techniques, we came to exactly the same conclusions as we did when using the resampling bootstrapping method. Comparing the widths of these intervals for the seasons with the resampling bootstrap intervals, we found that they were compareable. For the provinces, some of these confidence intervals were wider than the resampling bootstrap intervals, whereas some were narrower. The confidence intervals for retail had a similar standard error.
+When using parametric bootstrapping techniques, we came to exactly the same conclusions as we did when using the resampling bootstrapping method. Comparing the widths of these intervals for the seasons with the resampling bootstrap intervals, we found that they were comparable. For the provinces, some of these confidence intervals were wider than the resampling bootstrap intervals, whereas some were narrower. The confidence intervals for retail had a similar standard error, as did most other parameters.
 
 \input{tables/param.tex}
 
 \subsection{Smooth Bootstrap}
 The smooth bootstrap is not an ``ideal'' method for the given dataset, as only one predictor \textbf{(retail)} was continuous and real-valued. However, results were consistent with other methods, as discussed later.
 
+\subsubsection*{Procedure}
 Again using $B = 10000$, an algorithm was written to perform a smooth bootstrap. The \textbf{retail} column was found to have a sample variance of 1, due to the fact that it was standardized prior to model building. A reasonable value for the noise term was chosen, that is, $\frac{1}{\sqrt{n}} \approx 0.05783$. On each iteration, some $\varepsilon_i$ was added to the $i$'th value of retail, where $\varepsilon \sim N(0, 0.05783)$. Using this ``new'' dataset, a model was fit and the paramter estimates were recorded. Relevant code is shown below.
 
-\subsubsection*{Procedure}
+\clearpage
 \begin{lstlisting}
 addNoise <- function(X) {
-
     cols <- colnames(X)
     new_X <- X
     for (col in cols) {
@@ -228,33 +228,26 @@ addNoise <- function(X) {
 }
 
 smoothBoot <- function(X, y, B, noisefunc) {
-
     # Get sample size
     n <- nrow(X)
     # Initialize empty vector
     params <- c()
-    
     # Initialize progress bar
     pb <- txtProgressBar(min = 0, max = B, style = 3)
-    
     # Perform B iterations
     for (b in 1:B) {
         # Update progress bar
         setTxtProgressBar(pb, b)
-        
         # Get new dataset
         new_X <- noisefunc(X)
         new_data <- data.frame(protests=y, new_X)
-        
         # Fit the model with the simulated data
         smoothboot_model <- glm.nb(protests ~., data=new_data, init.theta = 5)
         boot_params <- coef(smoothboot_model)
         params <- rbind(params, boot_params)
     }
-    
     # Close progress bar
     close(pb)
-    
     return(params)
 }
 \end{lstlisting}
@@ -266,10 +259,10 @@ This method also showed us that retail did not have a significant effect on the 
 \input{tables/smooth.tex}
 
 \subsection{Error-Sampling Bootstrap}
+\subsubsection*{Procedure}
 Another bootstrap method was implemented, in which the error terms from the fitted model were randomly sampled with replacement, and added to the fitted values. Notably, some resulting simulated counts were rounded up to zero in the case where a negative value was produced. This was required both logically; as protests counts cannot be negative, and mathematically; as the negative binomial glm cannot be fit with negative training outputs. As a result, the integrity of the simulated datasets was not assumed to be completely intact, the implications of which are discussed later.
 
-\subsubsection*{Procedure}
-
+\vspace{0.5cm}
 \begin{lstlisting}
 epsilonBoot <- function(X, model, B, errors) {
 
@@ -313,68 +306,65 @@ Each of our bootstrapping methods produced similar results, with the resampling 
 \subsection*{Methods}
 Using observations of \textbf{retail} from 2017 to 2022, we fit a linear model predicting the total retail sales using a stepwise selection method using province, year, and season.
 
-We used this model to create 95\% prediction intervals for the retail sales in each province for every month in the year 2030. Normally across these intervals, we randomly sampled values to use as the projected retail sales. For each of these projected retail sales, we sampled from our negative binomial model to predict each province's total protests each season. Combining the seasons, we predicted the median number of protests in each Canadian province and territory based on our projected retail sales with 95\% prediction intervals.
+We used this model to create 95\% prediction intervals for the retail sales in each province for every month in the year 2030. From this model, we sampled from a $N(\mu, \sigma^2)$ distribution to simulate projected retail values, where $\mu$ was the predicted mean response by the linear model, and $\sigma^2$ was the mean squared error. For each of these projected retail sales, we sampled from our negative binomial model to predict each province's total protests each season. Combining the seasons, we predicted the median number of protests in each Canadian province and territory based on our projected retail sales with 95\% prediction intervals.
 
+\vspace{0.5cm}
 \begin{lstlisting}
-num_iterations <- 10000
+num_iterations <- 2860
 results <- c()
 
+retail_pred_std <- summary(retail_predictor)$sigma
+bar <- txtProgressBar(min=0, max=num_iterations, style=1)
+
 for (i in 1:num_iterations) {
+    # Get constant values
+    blank_data <- data[as.character(data$year) == "2023", ][, c(-3)]
+    blank_data$year <- 2030
+    retail_preds <- predict.lm(retail_predictor, newdata=blank_data, interval = "prediction")
+    pred_means <- retail_preds[, "fit"]
+    
+    # Predict retail stochastically
+    blank_data <- cbind(blank_data, retail_preds)
+    blank_data <- as.data.frame(blank_data)
+    pred_retails <- rnorm(n=nrow(blank_data), mean=pred_means, sd=retail_pred_std)
+    blank_data$retail <- pred_retails
+    blank_data[, c("fit", "lwr", "upr")] <- NULL
+    blank_data$year <- NULL
 
-	blank_data <- data[as.character(data$year) == "2023", ][, c(-3)]
-
-	blank_data$year <- 2030
-	# Predict retail uniformly from interval
-	blank_data <- cbind(blank_data, predict.lm(retail_predictor, newdata=blank_data, interval = "prediction"))
-	blank_data <- as.data.frame(blank_data)
-	pred_retails <- runif(n=nrow(blank_data), min=blank_data$lwr, max=blank_data$upr)
-	
-	blank_data$retail <- pred_retails
-	blank_data[, c("fit", "lwr", "upr")] <- NULL
-	blank_data$year <- NULL
-	
-	# Predict protests
-	blank_data$protests <- predict.glm(model, newdata=blank_data, type="response")
-	# Round off to nearest integer
-	blank_data$protests <- round(blank_data$protests)
-
-	rownames(blank_data) <- NULL
-	results <- rbind(results, blank_data)
+    # Predict protests
+    blank_data$protests <- predict.glm(model, newdata=blank_data, type="response")
+    # Round off to nearest integer
+    blank_data$protests <- round(blank_data$protests)
+    rownames(blank_data) <- NULL
+    results <- rbind(results, blank_data)
+    setTxtProgressBar(bar, i)
 }
+close(bar)
 \end{lstlisting}
 
 \subsection*{Results}
-Here we compare 95\% Monte Carlo prediction intervals with the observed number of protests in each province during the year 2023. Each of the confidence intervals, except for Quebec and Ontario, are entirely below the observed number of protests in 2023. This is to be expected as total retail sales have a negative association with number of protests, which we can see from the negative estimate of the parameter, meaning that as the total retail sales increase, the number of protests is expected to decrease. In 2030, it is expected that the total retail sales will increase, so this increase in retail sales explains the typical predicted decrease in protests. The lack of decrease in protests in Ontario and Quebec could have been due to random variation in the number of protests in 2023. For example Ontario and Quebec may have had a large number of protests in that year.
+Here we compare 95\% Monte Carlo prediction intervals with the observed number of protests in each province during the year 2023. Each of the confidence intervals, except for Quebec and Ontario, are entirely below the observed number of protests in 2023. This is to be expected as total retail sales have a negative association with number of protests, which we can see from the negative estimate of the parameter, meaning that as the total retail sales increase, the number of protests is expected to decrease. In 2030, it is expected that the total retail sales will increase, so this increase in retail sales explains the typical predicted decrease in protests. The lack of decrease in protests in Ontario and Quebec could have been due to random variation in the number of protests in 2023. For example, Ontario and Quebec may have had a large number of protests in that year.
 
 
-\begin{table}[hbt!]
-  \centering
-  \begin{tabular}{|l|c|c|c|c|c|c|c|}
-    \hline
-    \textbf{prov}             & \textbf{2023} & \textbf{2.5\%} & \textbf{50\%} & \textbf{97.5\%} & \textbf{pred.effect} & \textbf{sig.effect} \\
-
-    \hline
-    Alberta                   & 139           & 103            & 116           & 131             & dec.                 & Y                   \\
-    British Columbia          & 284           & 193            & 218           & 245             & dec.                 & Y                   \\
-    Manitoba                  & 118           & 63             & 71            & 81              & dec.                 & Y                   \\
-    New Brunswick             & 61            & 37             & 42            & 48              & dec.                 & Y                   \\
-    Newfoundland and Labrador & 61            & 26             & 30            & 34              & dec.                 & Y                   \\
-    Northwest Territories     & 6             & 0              & 0             & 2               & dec.                 & Y                   \\
-    Nova Scotia               & 85            & 43             & 48            & 55              & dec.                 & Y                   \\
-    Nunavut                   & 11            & 3              & 5             & 7               & dec.                 & Y                   \\
-    Ontario                   & 627           & 668            & 755           & 849             & inc.                 & Y                   \\
-    Prince Edward Island      & 29            & 11             & 12            & 15              & dec.                 & Y                   \\
-    Quebec                    & 270           & 250            & 282           & 317             & inc.                 & N                   \\
-    Saskatchewan              & 56            & 33             & 38            & 43              & dec.                 & Y                   \\
-    Yukon                     & 18            & 11             & 12            & 15              & dec.                 & Y                   \\
-    \hline
-  \end{tabular}
-  \caption{95\% Prediction Intervals for Total Yearly Protests by Province, 2030}
-\end{table}
+\input{tables/monte_carlo.tex}
 
 \newpage
 \section{Conclusion}
-For this project we fit a Negative Binomial Generalized Linear Regression Model including the predictors season, retail, and province. We used this model to perform resampling bootstrapping, parametric bootstrapping, smooth bootstrapping and error-sampling bootstrapping to create 95\% confidence intervals. In all four cases, summer and British Columbia were in the top three most significant parameters. Finally, we created projections for retail sales in 2030 and used these to create 95\% Monte Carlo prediction intervals for the median number of protests in each Canadian province and territory. These projected increases in sales led to decreased predictions for the number of protests in each province, except for the two in our model with the largest positive parameter estimates, Ontario and Quebec.
+For this project, we fit a negative binomial Generalized Linear Regression Model including the predictors season, retail, and province. We used this model to perform resampling bootstrapping, parametric bootstrapping, smooth bootstrapping and error-sampling bootstrapping to create 95\% confidence intervals. In all four cases, summer and British Columbia were in the top three most significant parameters. Finally, we created projections for retail sales in 2030 and used these to create 95\% Monte Carlo prediction intervals for the median number of protests in each Canadian province and territory. These projected increases in sales led to decreased predictions for the number of protests in each province, except for the two in our model with the largest positive parameter estimates, Ontario and Quebec.
 Overall, using methods learned in STAT 413, we were able to come to interesting conclusions regarding Canadian protests.
+
+\newpage
+\section*{Bibliography}
+
+\hspace{0.6cm}Hilbe, J. M. (2011). Negative binomial regression: modeling. In Negative Binomial Regression (pp. 221-283). Cambridge University Press.
+\vspace{0.5cm}
+
+Statistics Canada. (2024, March 4). Historical (real-time) releases of monthly retail trade, sales (x 1,000) [Data table]. doi.org/10.25318/2010008101-eng
+\vspace{0.5cm}
+
+Statistics Canada. (2024, April 2). Electric power generation, monthly receipts, deliveries and availability [Data table]. doi.org/10.25318/2510001601-eng
+\vspace{0.5cm}
+
+Statistics Canada. (2020, February 19). Monthly Oil and Other Liquid Petroleum Products Pipeline Survey (MOPS).
 
 \end{document}
