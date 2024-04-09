@@ -1,9 +1,9 @@
-PWD /home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/draft
+PWD /home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/document
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/draft/draft.tex
-OUTPUT draft.log
+INPUT /home/leoKraushaar/Documents/School/Year 3/Semester 2/STAT 413/Project/protests/latex/document/project.tex
+OUTPUT project.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -623,10 +623,10 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-INPUT ./draft.aux
-INPUT draft.aux
-INPUT draft.aux
-OUTPUT draft.aux
+INPUT ./project.aux
+INPUT project.aux
+INPUT project.aux
+OUTPUT project.aux
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -646,18 +646,18 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT ./draft.out
-INPUT draft.out
-INPUT ./draft.out
-INPUT draft.out
-INPUT ./draft.out
-INPUT draft.out
-INPUT ./draft.out
-INPUT draft.out
-OUTPUT draft.pdf
-INPUT ./draft.out
-INPUT ./draft.out
-OUTPUT draft.out
+INPUT ./project.out
+INPUT project.out
+INPUT ./project.out
+INPUT project.out
+INPUT ./project.out
+INPUT project.out
+INPUT ./project.out
+INPUT project.out
+OUTPUT project.pdf
+INPUT ./project.out
+INPUT ./project.out
+OUTPUT project.out
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/lm/rm-lmr17.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/lm/rm-lmr17.tfm
@@ -739,9 +739,9 @@ INPUT ./tables/monte_carlo.tex
 INPUT tables/monte_carlo.tex
 INPUT ./tables/monte_carlo.tex
 INPUT tables/monte_carlo.tex
-INPUT draft.aux
-INPUT ./draft.out
-INPUT ./draft.out
+INPUT project.aux
+INPUT ./project.out
+INPUT ./project.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi8.pfb
