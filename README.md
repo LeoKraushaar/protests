@@ -1,1 +1,1 @@
-# protests
+# STAT 413 Project, by Leo Kraushaar and Ali Hay
